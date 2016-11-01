@@ -1,0 +1,41 @@
+.title-h1 {
+    margin-bottom: 0px;
+    font-size: 5em;
+}
+
+.title-h2 {
+    font-size: 3em;
+    margin-bottom: 30px;
+    line-height: 1.2em;
+}
+
+.title-p {
+    margin-bottom: 30px;
+}
+
+#header a, #header strong {
+    color: #537699 !important;
+}
+
+#header .logo:hover, #header a:hover, #header strong:hover{
+    color: #3d4449 !important;
+}
+
+.team-image img {
+    border-radius: 50%;
+    max-width: 200px;
+    margin-right: 30px;
+}
+
+.posts article .image {
+    margin-bottom: 0px;
+}
+
+.poptrox-popup {
+    padding-bottom: 0px;
+}
+
+#menu .active-menu {
+    font-weight: 700;
+    color: #537699
+}
