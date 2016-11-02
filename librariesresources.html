@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>UQ MozART - Libraries &amp; Resources</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/custom.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="main">
+				<div class="inner">
+					<header id="header" style="padding-top:30px;">
+						<a href="index.html" class="logo"><strong>UQ MozART</strong></a>
+						<ul class="icons">
+							<li>
+								<a href="#" class="icon fa-twitter">
+									<span class="label">Twitter</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="icon fa-facebook">
+									<span class="label">Facebook</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="icon fa-instagram">
+									<span class="label">Instagram</span>
+								</a>
+							</li>
+						</ul>
+					</header>
+
+					<section style="padding-top:30px;">
+						<header class="main">
+							<h1 style="margin-bottom:30px;">Libraries &amp; Resources</h1>
+						</header>
+						<!-- <span class="image main"><img src="images/pic11.jpg" alt="" /></span> -->
+
+						<p>A number of open-source Processing libraries are used within the source code of the project to facilitate various aspects of the installation. All of the libraries used are freely available via Processing’s Library Manager, and are explained further below.</p>
+
+						<hr class="major" />
+
+						<h3>OpenKinect</h3>
+						<p>The OpenKinect library was instrumental in the success of the project, and without it, it is likely that development would have had to occur in something like Unity or C++. The library assisted in retrieving the depth values sent by the Kinect and organising them into a usable form. The library also includes a lot of other functionality which was not used, including skeleton tracking, point clouds, and much more.</p>
+
+						<p>More information about Daniel Shiffman’s OpenKinect library can be found here: <a href="http://shiffman.net/p5/kinect/" target="_blank">http://shiffman.net/p5/kinect/</a> The source code for the library can be found here: <a href="https://github.com/shiffman/OpenKinect-for-Processing" target="_blank">https://github.com/shiffman/OpenKinect-for-Processing</a> or by direct download inside Processing.</p>
+
+						<hr class="major" />
+
+						<h3>MSAFluid</h3>
+						<p><i>“MSAFluid is an open source C++ / Java / AS3 library for solving and displaying real-time 2D fluid simulations based on Navier-Stokes equations.”</i> Memo Akten’s fantastic library was used in the project as the foundation of the visuals projected onto the spandex canvas. With existing support for TUIO, it was the perfect starting point for integration with the Kinect. Although the current visuals are heavily modified, all work was done on top of the existing demo sketch.</p>
+
+						<p>More information about Memo Akten's MSAFluid library can be found here: <a href="http://www.memo.tv/ofxmsafluid/" target="_blank">http://www.memo.tv/ofxmsafluid/</a> The source code for the library can be found here: <a href="https://github.com/memo/p5-MSAFluid" target="_blank">https://github.com/memo/p5-MSAFluid</a> or by direct download inside Processing.</p>
+
+						<hr class="major" />
+
+						<h3>TUIO</h3>
+						<p>As the MSAFluid library cane with inbuilt functions to support integration with interfaces using TUIO, it was decided that working up our own functions to send the Kinect blobs to the visuals was the easiest path. The TUIO library was used in conjunction with the MSAFluid library to support this functionality.</p>
+
+						<p>More information about Martin Kaltenbrunner’s Processing TUIO library can be found here: <a href="http://www.tuio.org/?processing" target="_blank">http://www.tuio.org/?processing</a> The source code for the library can also be found at that site, or by direct download inside Processing.</p>
+
+						<hr class="major" />
+
+						<h3>BlobDetection</h3>
+						<p>This lightweight blob detection library, created by French programmer Julien Gachadoat, was used as an alternative to OpenCV after problems arose whilst using that library inside Processing on the Mac Mini. Despite not providing functionality for tracking blobs, which was later implemented on our own, it was found to be very easy to integrate and quite fast.</p>
+
+						<p>More information about V3ga’s BlobDetection library can be found here: <a href="http://www.v3ga.net/processing/BlobDetection/" target="_blank">http://www.v3ga.net/processing/BlobDetection/</a> The source code for the library can be found here: <a href="http://www.v3ga.net/processing/BlobDetection/index-page-download.html" target="_blank">http://www.v3ga.net/processing/BlobDetection/index-page-download.html</a> or by direct download inside Processing.</p>
+
+						<hr class="major" />
+
+						<h3>MidiBus</h3>
+						<p><i>“The MidiBus is a MIDI library for Processing. It provides a quick and simple way to access and interact with installed MIDI system resources. The MidiBus is aimed primarily at real time MIDI applications. The focus is on strong MIDI I/O capabilities and keeping frills to a minimum.”</i> This library was used in the project to facilitate the MIDI communication from Processing to the virtual MIDI ports created with LoopMIDI which would funnel the MIDI data to Ableton Live.</p>
+
+						<p>More information about Severin Smith’s MidiBus library can be found here: <a href="http://www.smallbutdigital.com/themidibus.php" target="_blank">http://www.smallbutdigital.com/themidibus.php</a> The source code for the library can be found here: <a href="https://github.com/sparks/themidibus" target="_blank">https://github.com/sparks/themidibus</a> or by direct download inside Processing.</p>
+
+						<hr class="major" />
+
+						<h3>oscP5</h3>
+						<p><i>“Open Sound Control is a protocol for communication among computers, sound synthesizers, and other multimedia devices that is optimized for modern networking technology and has been used in many application areas.”</i> This OSC library was used throughout the project to allow communication and passing of data between sketches. This occurred primarily in the transfer between the Kinect and the visuals, where two separate files were involved.</p>
+
+						<p>More information about Andreas Schlegel’s oscP5 library can be found here: <a href="http://www.sojamo.de/libraries/oscP5/" target="_blank">http://www.sojamo.de/libraries/oscP5/</a> The source code for the library can be found here: <a href="https://code.google.com/archive/p/oscp5/" target="_blank">https://code.google.com/archive/p/oscp5/</a> or by direct download inside Processing.</p>
+					</section>
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+					<!-- Menu -->
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="index.html">Homepage</a></li>
+							<li><a href="projectoverview.html">Project Overview</a></li>
+							<li>
+								<span class="opener active">Final Reports</span>
+								<ul>
+									<li><a href="report-astrid.html">Astrid</a></li>
+									<li><a href="report-daniel.html">Daniel</a></li>
+									<li><a href="report-melinda.html">Melinda</a></li>
+									<li><a href="report-naomi.html">Naomi</a></li>
+								</ul>
+							</li>
+							<li><a href="codeguide.html">Code Guide</a></li>
+							<li><a href="setuprequirements.html">Setup/Requirements</a></li>
+							<li><a class="active-menu" href="librariesresources.html">Libraries &amp; Resources</a></li>
+							<li><a href="projectinfluences.html">Project Influences</a></li>
+							<li><a href="touchensemble.html">UQ Touch Ensemble</a></li>
+						</ul>
+					</nav>
+					<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy;UQMozART. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+				</div>
+			</div>
+		</div>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/jquery.poptrox.min.js"></script>
+	</body>
+</html>
