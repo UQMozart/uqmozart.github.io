@@ -39,3 +39,9 @@
     font-weight: 700;
     color: #537699
 }
+
+.code-guide li {
+    max-width: 1000px;
+    margin: 15px 0px 15px 0px;
+    list-style-type: square;
+}

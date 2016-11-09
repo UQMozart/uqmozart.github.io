@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>UQ MozART - Code Guide</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/custom.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="main">
+				<div class="inner">
+					<header id="header" style="padding-top:30px;">
+						<a href="index.html" class="logo"><strong>UQ MozART</strong></a>
+						<ul class="icons">
+							<li>
+								<a href="#" class="icon fa-twitter">
+									<span class="label">Twitter</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="icon fa-facebook">
+									<span class="label">Facebook</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="icon fa-instagram">
+									<span class="label">Instagram</span>
+								</a>
+							</li>
+						</ul>
+					</header>
+
+					<section style="padding-top:30px;" class="code-guide">
+						<header class="main">
+							<h1 style="margin-bottom:30px;">Code Guide</h1>
+						</header>
+						<!-- <span class="image main"><img src="images/pic11.jpg" alt="" /></span> -->
+
+						<p>This code guide is intended to help explain the process from start to finish which creates the final demonstratable project. We have attempted to keep technically complex descriptions to a minimum, and use layman's terms where possible. If you are interested in looking at the source code for the project, it has been thoroughly commented here for your convenience: <a href="https://github.com/UQMozart/UQMozART-Interactive-Installation" target="_blank">https://github.com/UQMozart/UQMozART-Interactive-Installation</a></p>
+
+						<hr class="major" />
+
+						<h3>Kinect Depth Thresholding</h3>
+						<ul>
+							<li>For every frame that the sketch is running (e.g. 30 frames/second), the Kinect will send an array consisting of 512 (width) x 424 (height) depth values, of which each value is between 0 and 4500 (corresponding to the distance in centimetres from the Kinect itself).</li>
+							<li>Processing will then take this information, as well as the threshold that has been set as just in front of the spandex, and will check each depth value against the threshold.</li>
+							<li>Prior to this, Processing will have created a blank image of black pixels with the same dimensions as the Kinect (512 x 424).</li>
+							<li>For each value in the depth array, if the value is in front of the threshold, Processing will colour the corresponding pixel red. If the value is not in front of the threshold it will be left as black. So now we have a new image for each frame which highlights only where the canvas is being pushed.</li>
+							<li>We will then take this image and apply a blurring algorithm to it to remove any stray particles the Kinect may have accidentally picked up, so that we end up with a much cleaner (albeit blurry) image.</li>
+						</ul>
+
+						<hr class="major" />
+
+						<h3>Blob Detection</h3>
+						<ul>
+							<li>Next, this image will be passed on to the Blob detection library, which will work its magic to determine where blobs are located in the image, which is why we applied a different colour to the pixels in front of the threshold.</li>
+							<li>Once the Blob detection library has finished its work, it will return an array of Blobs of which each has its own accessible properties (height, width, X, Y, etc.). However, this array is replaced every frame, and blobs in the array are in order of top left to bottom right, meaning that the same blob may not be in the same array index position across different frames, which is problematic.</li>
+							<li>In order to track these blobs across frames we are storing the array of blobs from the previous frame too, and them comparing it to the current frame to find which blobs existed in the previous frame.</li>
+							<br>
+							<p>In this comparison, there are 3 cases:</p>
+							<ol>
+								<li>There are more blobs in the current frame then there were in the previous frame (so new blobs have occurred)</li>
+								<li>There are less blobs in the current frame then there were in the previous frame (so some blobs have died)</li>
+								<li>There are the same number of blobs in the current frame as there were in the previous frame</li>
+							</ol>
+							<li>The code that compares frames for blobs works by checking each blob in the new frame against every blob in the previous frame and comparing the distance away it is. It will find the closest blob within a specified range, and assume that it is the same blob, and will continue using its unique ID.</li>
+							<li>If a new blob has occurred, a new Blob object will be created with a new unique ID.</li>
+							<li>If a blob is not present in the new frame, it will be marked to be deleted and will survive for the next 5 frames before being deleted. If a similar enough blob reappears before it is deleted, then it will be marked as alive again, and will continue using its unique ID.</li>
+							<li>After analysing the blobs, we will have a resulting array of ‘Tracked’ blobs, which each have their own unique ID (a value incremented at every new blob), and will retain the properties of the blob it was identified as, including X, Y, width, height, etc.</li>
+							<li>For each of these ‘Tracked’ blobs, a number of functions are available to assist in calculating things like the speed, depth, and number of frames the blob has been alive for, all of which will be used in creating the sound and visuals.</li>
+						</ul>
+
+					</section>
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+					<!-- Menu -->
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="index.html">Homepage</a></li>
+							<li><a href="projectoverview.html">Project Overview</a></li>
+							<li>
+								<span class="opener active">Final Reports</span>
+								<ul>
+									<li><a href="report-astrid.html">Astrid</a></li>
+									<li><a href="report-daniel.html">Daniel</a></li>
+									<li><a href="report-melinda.html">Melinda</a></li>
+									<li><a href="report-naomi.html">Naomi</a></li>
+								</ul>
+							</li>
+							<li><a class="active-menu" href="codeguide.html">Code Guide</a></li>
+							<li><a href="setuprequirements.html">Setup/Requirements</a></li>
+							<li><a href="librariesresources.html">Libraries &amp; Resources</a></li>
+							<li><a href="projectinfluences.html">Project Influences</a></li>
+							<li><a href="touchensemble.html">UQ Touch Ensemble</a></li>
+						</ul>
+					</nav>
+					<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy;UQMozART. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+				</div>
+			</div>
+		</div>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/jquery.poptrox.min.js"></script>
+	</body>
+</html>
