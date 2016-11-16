@@ -98,7 +98,7 @@
 						<p>
 							<ul>
 								<i>
-								<b>Before you begin:</b>
+								<b id="audiotroubshoo">Before you begin:</b>
 								<li>Ableton Live will not be able to find the speakers if they are connected after the application is opened. Save yourself a headache and test that the device is working using Windows' sound control panel, before setting up Live.</li>
 								<li>Speakers must be the last device turned on and the first device turned off. This is to ensure that there is little to no static in the signal which may cause the speakers to blow out while setting up.</li>
 								<li>If possible, set the amplifier gain to -inf dB (may also be written as 0, depending on device) before beginning. Again, this is largely to ensure that you don't blow out the speakers.</li>
@@ -160,7 +160,45 @@
 
 						<h3 id="live">Ableton Live Setup</h3>
 
-						<p>Content</p>						
+						<p>
+							<h4><i>Before you begin:</i></h4>
+							You will need to ensure that you have installed both the <a href="http://www.asio4all.com/" alt="Audio Stream Input/Output not Australian Security Intelligence Organisation">ASIO4All</a> driver and <a href="http://www.tobias-erichsen.de/software/loopmidi.html">loopMIDI</a>. 
+							<br/>
+							<br/>
+							In order to connect the Processing Sketch to Ableton Live, you will need to set up loopMIDI as below:
+							<br/>
+							<img src="images/loopmidi.png"/>
+						</p>
+						<p>
+							<h4>Calibrating MIDI Ports</h4>
+							<i><a href="https://www.ableton.com/en/manual/routing-and-i-o/#monitoring">For an indepth guide on Routing and I/O in Live, click here.</a></i> 
+							<br/><br/>
+							<b>Step 1)</b>
+							Within Live, open the Preferences menu (ctrl +). Select the Link/MIDI tab and set as below:
+							<br/>
+							<img src="images/pref.png"/>
+							<br/>
+							Once these settings are correct, close the Preferences menu.
+							<br/><br/><b>Step 2)</b>
+							Ensure that you are both in <a href="https://www.ableton.com/en/manual/session-view/">Session View</a> and have the In/Out section toggled on. To switch between Session and Arrangement view, press tab. To toggle In/Out, click the I.O button on the bottom right of the window. 
+							<br/><br/><b>Step 3)</b>
+							For each of the six instrument channels, select the respective loopMIDI device in the MIDI From drop down menu. You don't need to change any other settings in this section, though you can change Monitor to "In" if Live appears to be sending data back to the loopMIDI device causing it to slow down.
+							<br/><br/><b>Step 4)</b>
+							Finally, arm each MIDI device by ctrl clicking on each track's <a href="https://www.ableton.com/en/manual/recording-new-clips/#arming-record-enabling-tracks">arm button</a>. 
+							<br/><br/>
+							After following these steps, your Session should look like this:
+							<br/>
+							<img src="images/armed.png">
+						</p>
+						<p>
+							<h4>Mapping MIDI</h4>
+
+						</p>
+						<p>
+							<h4>Troubleshooting</h4>
+							If there is a massive delay between sending MIDI to Live and it generating sound, 
+							If Live isn't generating sound, ensure that you followed <a href="#audiotroubshoo"><i>Before You Begin</i></a> in the Speaker Setup section.
+						</p>
 					</section>
 				</div>
 			</div>
