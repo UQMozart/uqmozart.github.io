@@ -45,3 +45,7 @@
     margin: 15px 0px 15px 0px;
     list-style-type: square;
 }
+
+.report-title {
+    font-size: 3.5em;
+}
