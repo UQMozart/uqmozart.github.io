@@ -54,6 +54,7 @@
 							<li><a href="#project">Projector Setup</a></li>
 							<li><a href="#speaker">Speaker Setup + Requirements</a></li>
 							<li><a href="#live">Ableton Live Setup</a></li>
+							<li><a href="#processing">Processing Setup</a></li>
 						</ul>
 
 						<hr class="major" />
@@ -162,7 +163,7 @@
 						<h2 id="live">Ableton Live Setup</h2>
 
 						<p>
-							<i id="here">Download the Live 9 project files we used for MozART<a href="">here</a></i>
+							<i id="here">Download the Live 9 project files we used for MozART <a href="assets/MozARTFinalProject.zip">here</a></i>
 							<h4><i>Before you begin:</i></h4>
 							You will need to ensure that you have installed both the <a href="http://www.asio4all.com/" alt="Audio Stream Input/Output not Australian Security Intelligence Organisation">ASIO4All</a> driver and <a href="http://www.tobias-erichsen.de/software/loopmidi.html">loopMIDI</a>. 
 							<br/>
@@ -200,7 +201,22 @@
 							Before you begin, open setMIDIMaps.pde which should be contained in a folder titled setMIDIMaps. This particular sketch spoofs the MIDI data which would be sent to Live during a MozART performance allowing you to accurately map particular data points to variables within Live. If you are building the instrument from scratch it is strongly recommended that you highlight values that you wish to change by placing the devices in either an instrument rack or an effect rack, with each particular value mapped to a macro. <a href="https://www.ableton.com/en/manual/instrument-drum-and-effect-racks/"><i>To find out more about Instrument, Drum and Effect Racks, click here.</i></a>
 						</p>
 						<p>
-
+							To begin, select the first instrument you would like to map. Then click the MIDI button in the top right corner of Live to start mapping MIDI devices. You will need to stop MIDI mapping when you switch instruments, as Live might lose previously saved mappings.
+							<br/>
+							To map a device, click on the macro you wish to control, then click the respective parameter within the setMIDIMaps program. You will need to repeat this process for each individul instrument track, so pay careful attention to which instrument you are controlling.
+						</p>
+						<p>
+							
+							If you ever get lost while mapping, you can refer to the fraction next to the macro you just mapped. The numerator signifies which MIDI device is going to control that particular data point, while the denominator represents the MIDI CC channel. The CC channels in setMIDIMaps are under the following names:
+							<ul>
+							<li>CC 1: Map Depth</li>
+							<li>CC 2: Map Lifespan</li>
+							<li>CC 3: Map Speed</li>
+							<li>CC 4: Map X-axis</li></ul>
+						</p>
+						<p>
+							Once you're finished you should have a list of mappings similar to this:<br/>
+							<img src="images/scsh1.png" >
 						</p>
 						<p>
 							<h4>Troubleshooting</h4>
@@ -208,6 +224,9 @@
 							<br/>
 							If the Audio is crackling, there may be an issue with the latency within Live. To fix this, you will need to fiddle with the input buffer size to reach a point where the audio isn't massively delayed as well as not crackling. <a href="https://www.ableton.com/en/manual/midi-fact-sheet/#tips-for-achieving-optimal-midi-performance">These are Ableton's suggestions for optimising audio quality with MIDI</a>
 						</p>
+						<hr class="major" />
+
+						<h2 id="processing">Processing Setup</h2>
 					</section>
 				</div>
 			</div>
