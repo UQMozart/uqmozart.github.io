@@ -79,6 +79,53 @@
 							<li>For each of these ‘Tracked’ blobs, a number of functions are available to assist in calculating things like the speed, depth, and number of frames the blob has been alive for, all of which will be used in creating the sound and visuals.</li>
 						</ul>
 
+						<hr class="major" />
+
+						<h3>Sending MIDI</h3>
+						<ul>
+							<li>The next step is to start sending the MIDI data to Ableton, which is done via 6 virtual MIDI ports created by the program loopMIDI, which will need to be running at the same time.</li>
+							<li>The list of ‘Tracked’ blobs will be iterated over, and separated into three new lists, each representing a section of the canvas, the left, middle, and right. This is done by checking the X position of the blob and determining if it falls within the left third, the middle third, or the right third of the canvas.</li>
+							<li>Once the three separate lists have been populated with ‘Tracked’ blobs, three arrays are also created, each to represent the two tracks corresponding to that session, which will be used to determine if MIDI is already being sent to a channel or not when iterating over the blobs.</li>
+							<li>For each blob in a section, it will first be checked whether the unique ID of that blob was present in the MIDI being sent to the tracks in that section in the previous frame. This is done so that if two blobs are sending MIDI each to a track, and one blob is removed, the second blob will continue sending MIDI to the correct track.</li>
+							<li>If the blob ID is found to be in the previous frame, it will send the new set of MIDI data to the same track, and will mark that track as being filled.</li>
+							<li>If the blob ID is not present in the previous frame, it will check if either of the tracks in its section are free, and if they are it will send its MIDI data to that track and then mark the track as filled.</li>
+							<br>
+							<p>When sending MIDI data to Ableton, a number of calculations need to be performed.</p>
+							<ol>
+								<li>The Y position will be grabbed for the blob and will be mapped to a value between 0 and 127 (after subtracting the empty space above the frame which is picked up by the kinect). This information will then be sent in a Note On MIDI message with the Y value now acting as the pitch.</li>
+								<li>The depth of the blob will then be calculated, using the X and Y positions to pinpoint the corresponding index in the depth array. This depth value will then be mapped to a new value between 0 and 127 using the threshold of the spandex as a reference, and then sent as a MIDI CC message.</li>
+								<li>The alive time, X position and speed are all mapped similarly to a new value between 0 and 127, with a few upper limits in place to ensure things do not get out of hand. These values are all also send as MIDI CC messages.</li>
+							</ol>
+
+						</ul>
+
+						<hr class="major" />
+
+						<h3>Sending TUIO</h3>
+						<ul>
+							<li>In order to create the visuals to correspond with the user's touches on the spandex, a number of TUIO messages must be send via an OSC port to the visuals sketch.</li>
+							<li>At the start of the sketch, we set up new OSC ports 3333 and 3334. OSC port 3333 is the default port used by MSAFluid, though this can be altered. Port 3334 is set up to receive messages back from the visuals, but this is not required.</li>
+							<li>The OSC port is given the local net address '127.0.0.1', since messages do not need to be sent between computers.</li>
+							<li>Two other OSC ports are setup for the purposes of sending additional data to the visuals outside the original MSAFluid ports. These ports are 12000 for sending and 32000 for receiving.</li>
+							<li>At each frame, a new OSC bundle will be created to which we will add individual messages.</li>
+							<li>The first message sends the stamp "/tuio/2Dcur" to identify that TUIO cursors are to follow, and then sends an "alive" string followed by the IDs of all the blobs that are present in the current frame. TUIO will use these alive IDs across frames to know when blobs disappear and then it can delete them itself.</li>
+							<li>Before the OSC message can be sent, a number of calculations occur on the X and Y positions, speed, depth and alivetime values so that they are in meaningful forms to be forwarded.</li>
+							<li>For each blob, a separate "/tuio/2Dcur SET" message will be added to the bundle containing all the data associated with that blob.</li>
+							<li>At the end of the OSC bundle will be a message which specifies the number of the current frame or the "fseq", which is used for idenitfication of frames incase they are lost in transmission.</li>
+							<li>All of these individual OSC messages are then added to the OSC bundle and sent to the 3333 port where it is picked up by MSAFluid.</li>
+							<li>Some other averaged information is sent to the other OSC port which is also picked up by MSAFluid, and contains things like the average speed of all blobs, average depth, and average alivetime.</li>
+						</ul>
+
+						<hr class="major" />
+
+						<h3>Receiving TUIO and Constructing the Visuals</h3>
+						<ul>
+							<li>The visuals are created using a modified version of the MSAFluid demo sketch, which comes included with the MSAFluid download. As such, most of the code required to obtain the incoming TUIO messages is containg within the library itself.</li>
+							<li>However, to explain briefly: The TUIO messages are received and converted into TUIO cursors which generate the visuals based on the X and Y position as well as velocity of the blob.</li>
+							<li>Additional data values sent from the master project are also used to manipulate the visuals created from the blobs, such as the speed and alive time.</li>
+							<li>Additional information can be found in the commented source code files in the GitHub repository under the MasterVisuals folder.
+						</ul>
+
 					</section>
 				</div>
 			</div>
